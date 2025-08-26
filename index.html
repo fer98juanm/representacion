@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>En breve comenzamos</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url(cruz.png);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #f2f0eb;
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .letra {
+      opacity: 0;
+      transform: translateY(50px);
+      animation: saltar 0.6s forwards;
+    }
+
+    @keyframes saltar {
+      0% { 
+        opacity: 0;
+        transform: translateY(50px) scale(0.5); 
+      }
+      60% { 
+        opacity: 1;
+        transform: translateY(-20px) scale(1.1); 
+      }
+      100% { 
+        transform: translateY(0) scale(1); 
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="titulo"></h1>
+
+  <script>
+    const texto = "EN BREVES COMENZAMOS";
+    const contenedor = document.getElementById("titulo");
+
+    function animarTexto() {
+      contenedor.innerHTML = ""; // limpiar antes de volver a escribir
+
+      texto.split("").forEach((char, i) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.classList.add("letra");
+        span.style.animationDelay = `${i * 0.1}s`; // efecto progresivo
+        contenedor.appendChild(span);
+      });
+
+      // repetir después de que termine la animación
+      setTimeout(animarTexto, texto.length * 100 + 2000);
+    }
+
+    animarTexto();
+  </script>
+</body>
+</html>
